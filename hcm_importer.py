@@ -17,6 +17,12 @@ data = data.fetch()
 # Convert fetched data to pandas DataFrame
 df = data.interpolate()  # Interpolate missing values if any
 
+# Format index as dd-mm-yyyy
+df.index = df.index.strftime('%d-%m-%Y')
+
+# Insert the date column as the first column
+df.insert(0, 'date', df.index)
+
 # Export data to Excel
 excel_file = 'weather_data_hcm_city.xlsx'
 # Delete the file if it exists
@@ -27,4 +33,3 @@ if os.path.exists(excel_file):
 df.to_excel(excel_file, index=False)
 
 print(f"Data has been exported to {excel_file}")
-print(data)
