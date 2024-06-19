@@ -34,4 +34,3 @@ if os.path.exists(excel_file):
 df.to_excel(excel_file, index=False)
 
 print(f"Data has been exported to {excel_file}")
-print(data)
