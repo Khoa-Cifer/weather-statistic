@@ -1,34 +1,36 @@
-# importing the required module
 import matplotlib.pyplot as plt
 import pandas as pd
- 
- # Example: Read specific sheet and columns
-df = pd.read_excel('hanoi_air_pollution_data.xlsx', sheet_name='Sheet1', usecols=['co'])
 
-# Convert the 'AQI' column of the DataFrame to a list
-aqi_values = df['co'].tolist()
+# Read the specific sheet and columns from the first Excel file
+df1 = pd.read_excel('hanoi_air_pollution_data_monthly.xlsx', sheet_name='Sheet1', usecols=['Month', 'co'])
+# Read the specific sheet and columns from the second Excel file
+df2 = pd.read_excel('hcm_air_pollution_data_monthly.xlsx', sheet_name='Sheet1', usecols=['Month', 'co'])
 
-# Get the number of rows in the DataFrame
-num_rows = df.shape[0]
+# Convert the 'Month' and 'co' columns of the DataFrames to lists
+months1 = df1['Month'].tolist()
+co_values1 = df1['co'].tolist()
+months2 = df2['Month'].tolist()
+co_values2 = df2['co'].tolist()
 
-# Generate a list of numbers from 1 to num_rows
-counted_list = list(range(1, num_rows + 1))
+# Plotting the data from the first file
+plt.plot(months1, co_values1, label='Hanoi', color='blue')
 
-# x axis values
-x = counted_list
-# corresponding y axis values
-y = aqi_values
- 
-# plotting the points 
-plt.plot(x, y)
- 
-# naming the x axis
-plt.xlabel('Date')
-# naming the y axis
-plt.ylabel('co')
- 
-# giving a title to my graph
-plt.title('co Graph')
- 
-# function to show the plot
+# Plotting the data from the second file
+plt.plot(months2, co_values2, label='HCM', color='red')
+
+# Naming the x axis
+plt.xlabel('Month')
+# Naming the y axis
+plt.ylabel('CO Levels')
+
+# Giving a title to the graph
+plt.title('CO Levels Comparison between Hanoi and HCM')
+
+# Adding a legend to distinguish between the two lines
+plt.legend()
+
+# Rotating x-axis labels for better readability
+plt.xticks(rotation=45)
+
+# Function to show the plot
 plt.show()
